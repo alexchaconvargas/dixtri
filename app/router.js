@@ -1,60 +1,25 @@
 // load the todo model
-var Todo = require('./models/todo');
+var User = require('./models/user');
 
 // expose the routes to our app with module.exports
 module.exports = function(app) {
 
     // API ---------------------------------------------------------------------
-    // get all todos
-    app.get('/api/todos', function(req, res) {
-        // use mongoose to get all todos in the database
-        Todo.find(function(err, todos) {
-
-            // if there is an error retrieving, send the error. nothing after res.send(err) will execute
-            if (err)
-                res.send(err)
-
-            res.json(todos); // return all todos in JSON format
-        });
+    
+    var router = express.Router();  
+    // middleware to use for all requests
+    router.use(function(req, res, next) {
+        // do logging
+        console.log('Something is happening.');
+        next(); // make sure we go to the next routes and don't stop here
     });
 
-    // create todo and send back all todos after creation
-    app.post('/api/todos', function(req, res) {
-        Todo.create({
-            text : req.body.text,
-            done : false
-        }, function(err, todo) {
-            if (err)
-                res.send(err);
-
-            // get and return all the todos after you create another
-            Todo.find(function(err, todos) {
-                if (err)
-                    res.send(err)
-                res.json(todos);
-            });
-        });
-
-
+    // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
+    router.get('/', function(req, res) {
+        res.json({ message: 'hooray! welcome to our api!' });   
     });
 
-    // delete a todo
-    app.delete('/api/todos/:todo_id', function(req, res) {
-        Todo.remove({
-            _id : req.params.todo_id
-        }, function(err, todo) {
-            if (err)
-                res.send(err);
-
-            // get and return all the todos after you create another
-            Todo.find(function(err, todos) {
-                if (err)
-                    res.send(err)
-                res.json(todos);
-            });
-        });
-
-    });
+    app.use('/api', router);
 
     // APPLICATION -------------------------------------------------------------
     app.get('/', function(req, res) {

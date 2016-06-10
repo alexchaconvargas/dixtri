@@ -1,9 +1,7 @@
 'use strict';
 
-
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
 
 // define the emailSchema
 var emailSchema = new Schema({
@@ -16,14 +14,10 @@ var emailSchema = new Schema({
 
 
 // define the userSchema
-var userSchema = new Schema({
-  name  : {
-    givenName   : String,
-    familyName  : String
-  },
-  emails: [emailSchema]
+var UserSchema = new Schema({
+    name   : String
 });
 
 
 // Export the User model
-exports.User = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', UserSchema);
