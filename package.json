@@ -1,0 +1,30 @@
+{
+  "name": "dixtri",
+  "version": "1.0.0",
+  "description": "job searching tool",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexchaconvargas/dixtri.git"
+  },
+  "keywords": [
+    "job",
+    "search"
+  ],
+  "author": "Alejandro Chacón",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexchaconvargas/dixtri/issues"
+  },
+  "homepage": "https://github.com/alexchaconvargas/dixtri#readme",
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.20",
+    "morgan": "^1.7.0",
+    "path": "^0.12.7"
+  }
+}
