@@ -1,12 +1,11 @@
 var express = require('express');
 // load the user model
-var User = require('./models/user');
 
 // expose the routes to our app with module.exports
 module.exports = function(app) {
 
-    var router = express.Router();
-var User     = require('./models/user');
+var router = express.Router();
+
 // middleware to use for all requests
 router.use(function(req, res, next) {
     // do logging
@@ -16,15 +15,30 @@ router.use(function(req, res, next) {
 
 // test route to make sure everything is working (accessed at GET http://localhost:3000/api)
 router.get('/', function(req, res) {
-    res.json({ message: 'hooray! welcome to our api!' });   
+    res.json({ message: 'Welcome to our api!' });   
 });
 
+// USERS
+// =============================================================================
+var User     = require('./models/user');
 router.route('/users')
-
     // create a user (accessed at POST http://localhost:3000/api/users)
     .post(function(req, res) {
         var user = new User();      // create a new instance of the User model
-        user.name = req.body.name;  // set the users name (comes from the request)
+        user.name = req.body.name;
+        user.firstSurname = req.body.firstSurname;
+        user.secondSurname = req.body.secondSurname;
+        user.birthDate = req.body.birthDate;
+        user.gender = req.body.gender;
+        user.country = req.body.country;
+        user.cpCode = req.body.cpCode;
+        user.province = req.body.province;
+        user.city = req.body.city;
+        user.adress = req.body.adress;
+        user.email = req.body.email;
+        user.city = req.body.city;
+        user.mobile = req.body.mobile;
+        user.landline = req.body.landline;
 
         // save the user and check for errors
         user.save(function(err) {
@@ -45,7 +59,6 @@ router.route('/users')
     });
 
 router.route('/users/:user_id')
-
     // get the user with that id (accessed at GET http://localhost:8080/api/users/:user_id)
     .get(function(req, res) {
         User.findById(req.params.user_id, function(err, user) {
@@ -88,14 +101,23 @@ router.route('/users/:user_id')
         });
     });
 
+// COMPANY
+// =============================================================================
+
+
+// CANDIDATE
+// =============================================================================
+
+
+// VACANCY
+// =============================================================================
+
 app.use('/api', router);
 
-app.get('/hello-world', function (req, res) {
-   res.sendFile( __dirname + "/" + "/public/hello-world.html" );
+
+// APPLICATION -------------------------------------------------------------
+app.get('/', function(req, res) {
+    res.sendFile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
 });
 
-    // APPLICATION -------------------------------------------------------------
-    app.get('/', function(req, res) {
-        res.sendFile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
-    });
 };

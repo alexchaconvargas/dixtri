@@ -3,9 +3,8 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-
-// define the userSchema
-var UserSchema = new Schema({
+// define the CandidateSchema
+var CandidateSchema = new Schema({
     name   : String,
     firstSurname: String,
     secondSurname: String,
@@ -13,15 +12,17 @@ var UserSchema = new Schema({
     dni: String,
     gender: String,
     country: String,
-    cpCode: String,
+    cpCode: Number,
     province: String,
     city: String,
     adress: String,
     email: String,
-	mobile: Number,
-	landline: Number
+    telephone : {
+    	mobile: Number,
+    	landline: Number
+    }
 });
 
 
 // Export the User model
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('Candidate', CandidateSchema);
