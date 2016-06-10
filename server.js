@@ -25,6 +25,11 @@ app.use(function(req, res, next) {
     next();
 });
 
+
+app.get('/hello-world', function (req, res) {
+   res.sendFile( __dirname + "/" + "/public/hello-world.html" );
+});
+
 app.listen(app.get('port'), function() {
   console.log('Server started: http://localhost:' + app.get('port') + '/');
 });
