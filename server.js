@@ -25,6 +25,8 @@ app.use(function(req, res, next) {
     next();
 });
 
+// routes ======================================================================
+require('./app/router.js')(app);
 
 app.get('/hello-world', function (req, res) {
    res.sendFile( __dirname + "/" + "/public/hello-world.html" );
