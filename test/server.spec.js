@@ -18,20 +18,5 @@ describe('Basic express server', function () {
       assert.equal(200, res.statusCode);
       done();
     });
-  });
-
-  it('should say "Hello, world!"', function (done) {
-    http.get('http://localhost:3000/hello-world', function (res) {
-      var data = '';
-
-      res.on('data', function (chunk) {
-        data += chunk;
-      });
-
-      res.on('end', function () {
-        assert.equal('Hello World!', data);
-        done();
-      });
-    });
-  });
+  }); 
 });

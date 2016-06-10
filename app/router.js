@@ -21,12 +21,12 @@ router.get('/', function(req, res) {
 
 router.route('/users')
 
-    // create a bear (accessed at POST http://localhost:3000/api/users)
+    // create a user (accessed at POST http://localhost:3000/api/users)
     .post(function(req, res) {
         var user = new User();      // create a new instance of the User model
         user.name = req.body.name;  // set the users name (comes from the request)
 
-        // save the bear and check for errors
+        // save the user and check for errors
         user.save(function(err) {
             if (err)
                 res.send(err);
@@ -57,7 +57,7 @@ router.route('/users/:user_id')
     // update the user with this id (accessed at PUT http://localhost:8080/api/users/:user_id)
     .put(function(req, res) {
 
-        // use our bear model to find the bear we want
+        // use our user model to find the user we want
         User.findById(req.params.user_id, function(err, user) {
 
             if (err)
@@ -65,7 +65,7 @@ router.route('/users/:user_id')
 
             user.name = req.body.name;  // update the users info
 
-            // save the bear
+            // save the user
             user.save(function(err) {
                 if (err)
                     res.send(err);
@@ -76,7 +76,7 @@ router.route('/users/:user_id')
         })
     })
 
-    // delete the bear with this id (accessed at DELETE http://localhost:8080/api/users/:bear_id)
+    // delete the user with this id (accessed at DELETE http://localhost:8080/api/users/:user_id)
     .delete(function(req, res) {
         User.remove({
             _id: req.params.user_id
@@ -97,9 +97,5 @@ app.get('/hello-world', function (req, res) {
     // APPLICATION -------------------------------------------------------------
     app.get('/', function(req, res) {
         res.sendFile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
-    });
-
-    app.get('/abc', function(req, res) {
-       res.send('aaaaa');
     });
 };
